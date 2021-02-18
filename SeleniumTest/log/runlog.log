@@ -1,0 +1,10 @@
+2021-02-18 16:11:24,665 SeleniumTestCase.py[line:209] INFO 测试登录
+2021-02-18 16:24:11,042 SeleniumTestCase.py[line:209] INFO 测试登录
+2021-02-18 16:48:21,689 SeleniumTestCase.py[line:209] INFO 测试登录
+2021-02-18 16:50:58,077 SeleniumTestCase.py[line:209] INFO 测试登录
+2021-02-18 16:51:34,071 SeleniumTestCase.py[line:209] INFO 测试登录
+2021-02-18 16:51:36,245 SeleniumTestCase.py[line:222] INFO <selenium.webdriver.remote.webelement.WebElement (session="64b7b7795a80404b33d83fcc4ff5ca98", element="7df2f966-33e3-4e40-8491-c0b7136b723d")>
+2021-02-18 16:52:35,642 SeleniumTestCase.py[line:209] INFO 测试登录
+2021-02-18 16:52:37,866 SeleniumTestCase.py[line:222] INFO 登录成功
+2021-02-18 16:53:16,661 SeleniumTestCase.py[line:209] INFO 测试登录
+2021-02-18 16:53:18,896 SeleniumTestCase.py[line:222] INFO 登录成功

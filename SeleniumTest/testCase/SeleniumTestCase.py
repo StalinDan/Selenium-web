@@ -2,7 +2,7 @@
 from selenium import webdriver
 import unittest
 import os
-import time
+import time,logging.config
 from report import HTMLTestRunner
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -10,12 +10,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
 
+CON_LOG = '../config/log.conf'
+logging.config.fileConfig(CON_LOG)
+logging = logging.getLogger()
+
 class TestForum(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
-        self.driver.get("http://47.104.84.186:8080/")
+        # self.driver.get("http://47.104.84.186:8080/")
+        self.driver.get("https://apartment.deayea.com/login")
         self.driver.maximize_window()
-        time.sleep(5)
+        time.sleep(3)
 
     def tearDown(self):
         print(time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())))
@@ -23,8 +28,8 @@ class TestForum(unittest.TestCase):
         if not os.path.exists(filedir):
             os.makedirs(os.path.join(filedir))
 
-        screen_name = filedir + time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())) + ".png"
-        self.driver.get_screenshot_as_file(screen_name)
+        # screen_name = filedir + time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())) + ".png"
+        # self.driver.get_screenshot_as_file(screen_name)
         self.driver.quit()
 
 
@@ -199,7 +204,23 @@ class TestForum(unittest.TestCase):
         print(text)
         self.assertEqual(alertKuang1[0].text, '发布帖子失败!')
 
-
+    def test01_login(self):
+        """测试登录"""
+        logging.info("测试登录")
+        self.driver.find_element_by_xpath('//*[@id="login-wrap"]/div[2]/div/div/form/div[1]/div/div/input').send_keys("123")
+        self.driver.find_element_by_xpath('//*[@id="login-wrap"]/div[2]/div/div/form/div[2]/div/div/input').send_keys("123")
+        self.driver.find_element_by_xpath('//*[@id="login-btn"]').click()
+        # self.driver.implicitly_wait(10)
+        time.sleep(2)
+        # self.driver.switch_to.active_element('/html/body/div[2]')
+        # self.driver.find_element_by_xpath('/html/body/div[2]')
+        text = self.driver.find_element_by_xpath('/html/body/div[2]/p').text
+        # alert = self.driver.switch_to.alert()
+        # logging.info(alert.text())
+        # print(alert.text())
+        # self.driver.implicitly_wait(10)
+        logging.info(text)
+        self.assertEqual("登录成功",text)
 
 
 if __name__ == "__main__":
@@ -207,7 +228,8 @@ if __name__ == "__main__":
     # suiteTest.addTest(TestForum("testReleasePost_01"))
     # suiteTest.addTest(TestForum("testReleasePost_02"))
     # suiteTest.addTest(TestForum("testReleasePost_03"))
-    suiteTest.addTest(TestForum("testReleasePost_04"))
+    # suiteTest.addTest(TestForum("testReleasePost_04"))
+    suiteTest.addTest(TestForum("test01_login"))
     filePath = "../report/testResult.html"
     fp = open(filePath, 'wb')
     runner = HTMLTestRunner.HTMLTestRunner(stream=fp, title='Test Report for me', description='This is my Report')

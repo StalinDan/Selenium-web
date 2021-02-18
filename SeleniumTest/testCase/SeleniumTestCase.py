@@ -230,7 +230,9 @@ if __name__ == "__main__":
     # suiteTest.addTest(TestForum("testReleasePost_03"))
     # suiteTest.addTest(TestForum("testReleasePost_04"))
     suiteTest.addTest(TestForum("test01_login"))
-    filePath = "../report/testResult.html"
-    fp = open(filePath, 'wb')
+    nowtime = time.strftime('%Y-%m-%d %H-%M-%S',time.localtime())
+    name = "../report/"+nowtime+"_testResult.html"
+    # filePath = "../report/testResult.html"
+    fp = open(name, 'wb')
     runner = HTMLTestRunner.HTMLTestRunner(stream=fp, title='Test Report for me', description='This is my Report')
     runner.run(suiteTest)

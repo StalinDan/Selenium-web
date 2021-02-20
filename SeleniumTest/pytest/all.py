@@ -1,3 +1,5 @@
+import os
+
 import pytest
 
 if __name__ == '__main__':
@@ -15,6 +17,9 @@ if __name__ == '__main__':
 
     # 失败重跑2次
     pytest.main(['-vs','--reruns=2'])
+
+    #生成allure报告
+    os.system('allure generate ./temp -o ./report --clean')
 
 
 
